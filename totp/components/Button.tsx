@@ -2,8 +2,8 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 export type ButtonProps = {
     text: string,
-    onPress: () => void,
-    disabled: boolean
+    onPress?: () => void,
+    disabled?: boolean
 }
 
 export function Button({
