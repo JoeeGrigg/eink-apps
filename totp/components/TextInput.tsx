@@ -41,7 +41,9 @@ function Input ({
                     </TouchableOpacity>
                 )}
             </View>
-            <Text style={styles.description}>{description}</Text>
+            {description && (
+                <Text style={styles.description}>{description}</Text>
+            )}
         </View>
     );
 }
