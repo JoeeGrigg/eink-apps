@@ -1,9 +1,11 @@
 import { Header } from '@/components/Header';
 import { addTotp } from '@/lib/storage';
-import { TouchableOpacity, TextInput, View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar'
+import { TextInput } from '@/components/TextInput';
+import { Button } from '@/components/Button';
 
 export default function() {
     let [name, setName] = useState('');
@@ -25,19 +27,25 @@ export default function() {
 
             <View style={styles.page}>
 
-                <View style={styles.inputContainer}>
-                    <Text style={styles.label}>Name</Text>
-                    <TextInput style={styles.input} value={name} onChangeText={setName}/>
-                </View>
+                <TextInput
+                    label="Name"
+                    value={name}
+                    onChangeText={setName}
+                    containerStyles={styles.inputContainer}
+                />
 
-                <View style={styles.inputContainer}>
-                    <Text style={styles.label}>Secret</Text>
-                    <TextInput style={styles.input} value={secret} onChangeText={setSecret}/>
-                </View>
+                <TextInput
+                    label="Secret"
+                    value={secret}
+                    onChangeText={setSecret}
+                    containerStyles={styles.inputContainer}
+                />
 
-                <TouchableOpacity onPress={save} disabled={name == '' || secret == ''} style={styles.button}>
-                    <Text style={styles.buttonText}>Save</Text>
-                </TouchableOpacity>
+                <Button
+                    text="Save"
+                    onPress={save}
+                    disabled={name == '' || secret == ''}
+                />
 
             </View>
         </SafeAreaView>
@@ -51,26 +59,5 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginBottom: 20
-    },
-    label: {
-        fontSize: 15,
-        marginBottom: 5
-    },
-    input: {
-        borderWidth: 1,
-        fontSize: 20,
-        borderRadius: 5
-    },
-    button: {
-        borderWidth: 2,
-        padding: 5,
-        paddingTop: 10,
-        paddingBottom: 10,
-        borderRadius: 5,
-        marginTop: 'auto'
-    },
-    buttonText: {
-        fontSize: 20,
-        textAlign: 'center'
     }
 });
