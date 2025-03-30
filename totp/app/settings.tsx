@@ -68,7 +68,10 @@ export default function() {
 
                 <TextInput
                     label="Backup Encryption Key"
-                    description="A secret key to use to encrypt the config of this app. If not supplied the config will be stored unencrypted."
+                    description={`A secret key to use to encrypt the config of this app.
+- If not supplied the config will be stored unencrypted.
+- If you set this value and forget it then your data will be lost.
+                    `}
                     value={backupEncryptionKey}
                     onChangeText={setBackupEncryptionKey}
                     containerStyles={styles.inputContainer}
