@@ -35,8 +35,6 @@ export default function() {
               { text: "Confirm", onPress: async () => save(saveableBackupHost, saveableBackupEncryptionKey) }
             ]
         )
-
-        
     }
 
     const save = async (saveableBackupHost: string | null, saveableBackupEncryptionKey: string | null) => {
