@@ -23,15 +23,24 @@ function Input ({
 
     return (
         <View style={containerStyles}>
-            <View style={styles.labelRow}>
-                <Text style={styles.label}>{label}</Text>
+            <Text style={styles.label}>{label}</Text>
+            <View style={styles.inputRow}>
+                <TextInput
+                    style={{
+                        ...styles.input,
+                        borderTopRightRadius: hidden ? 0 : 5,
+                        borderBottomRightRadius: hidden ? 0 : 5
+                    }}
+                    value={value}
+                    onChangeText={onChangeText}
+                    secureTextEntry={!textVisible}
+                />
                 {hidden && (
-                    <TouchableOpacity onPress={() => setTextVisible(!textVisible)}>
+                    <TouchableOpacity onPress={() => setTextVisible(!textVisible)} style={styles.hiddenButton}>
                         <FontAwesome name={textVisible ? 'eye-slash' : 'eye'} size={20}/>
                     </TouchableOpacity>
                 )}
             </View>
-            <TextInput style={styles.input} value={value} onChangeText={onChangeText} secureTextEntry={!textVisible}/>
             <Text style={styles.description}>{description}</Text>
         </View>
     );
@@ -39,19 +48,28 @@ function Input ({
 export { Input as TextInput }
 
 const styles = StyleSheet.create({
-    labelRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    },
     label: {
         fontSize: 15,
         marginBottom: 5
     },
+    inputRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     input: {
         borderWidth: 1,
         fontSize: 20,
-        borderRadius: 5
+        borderRadius: 5,
+        flex: 1
+    },
+    hiddenButton: {
+        padding: 10,
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderTopRightRadius: 5,
+        borderBottomRightRadius: 5
     },
     description: {
         marginTop: 5
