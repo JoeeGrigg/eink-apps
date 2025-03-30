@@ -58,10 +58,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   title: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 700,
-    marginTop: 15,
-    marginBottom: 15
+    marginTop: 10,
+    marginBottom: 10
   },
   icon: {
     marginLeft: 'auto',

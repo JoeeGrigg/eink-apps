@@ -1,6 +1,6 @@
 import { Header } from '@/components/Header';
 import { addTotp } from '@/lib/storage';
-import { Button, TextInput, View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { TouchableOpacity, TextInput, View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar'
@@ -35,7 +35,9 @@ export default function() {
                     <TextInput style={styles.input} value={secret} onChangeText={setSecret}/>
                 </View>
 
-                <Button title="Save" onPress={save} disabled={name == '' || secret == ''}/>
+                <TouchableOpacity onPress={save} disabled={name == '' || secret == ''} style={styles.button}>
+                    <Text style={styles.buttonText}>Save</Text>
+                </TouchableOpacity>
 
             </View>
         </SafeAreaView>
@@ -45,15 +47,30 @@ export default function() {
 const styles = StyleSheet.create({
     page: {
         padding: 20,
+        flex: 1
     },
     inputContainer: {
         marginBottom: 20
     },
     label: {
-        fontSize: 20
+        fontSize: 15,
+        marginBottom: 5
     },
     input: {
         borderWidth: 1,
-        fontSize: 30
+        fontSize: 20,
+        borderRadius: 5
+    },
+    button: {
+        borderWidth: 2,
+        padding: 5,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 5,
+        marginTop: 'auto'
+    },
+    buttonText: {
+        fontSize: 20,
+        textAlign: 'center'
     }
 });
