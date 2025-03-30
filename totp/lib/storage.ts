@@ -2,7 +2,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 
+const backupKey = 'backup';
 const storageKey = 'config';
+
+export type BackupConfig = {
+    host: string | null
+    encryptionKey: string | null
+}
 
 export type TotpItemConfig = {
     uuid: string,
@@ -16,6 +22,32 @@ export type StorageConfig = {
 
 export const defaultConfig: StorageConfig = {
     totps: {}
+}
+
+export const defaultBackupConfig: BackupConfig = {
+    host: null,
+    encryptionKey: null
+}
+
+export async function getBackupConfig(): Promise<BackupConfig> {
+    try {
+        const jsonValue = await AsyncStorage.getItem(backupKey);
+        return jsonValue == null ? setBackupConfig(defaultBackupConfig) : JSON.parse(jsonValue);
+    } catch (e) {
+        console.log(e);
+        return Promise.reject(e);
+    }
+}
+
+export async function setBackupConfig(value: BackupConfig): Promise<BackupConfig> {
+    try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem(backupKey, jsonValue);
+        return value;
+    } catch (e) {
+        console.log(e);
+        return Promise.reject(e);
+    }
 }
 
 export async function getConfig(): Promise<StorageConfig> {

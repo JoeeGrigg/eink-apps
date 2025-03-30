@@ -2,11 +2,26 @@ import { StyleSheet, SafeAreaView, View, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Header } from '@/components/Header'
 import { TextInput } from '@/components/TextInput';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { defaultBackupConfig, getBackupConfig, setBackupConfig } from '@/lib/storage';
 
 export default function() {
+    const [config, setConfig] = useState(defaultBackupConfig);
     const [backupHost, setBackupHost] = useState('');
     const [backupEncryptionKey, setBackupEncryptionKey] = useState('');
+
+    useFocusEffect(
+        useCallback(() => {
+          const fetchData = async () => {
+            const config = await getBackupConfig();
+            setConfig(config);
+            setBackupHost(config.host || '');
+            setBackupEncryptionKey(config.encryptionKey || '')
+          }
+          fetchData();
+        }, [])
+      );
 
     const triggerSave = async () => {
         const saveableBackupHost = backupHost || null;
@@ -25,7 +40,10 @@ export default function() {
     }
 
     const save = async (saveableBackupHost: string | null, saveableBackupEncryptionKey: string | null) => {
-        console.log(saveableBackupHost, saveableBackupEncryptionKey);
+        setBackupConfig({
+            host: saveableBackupHost,
+            encryptionKey: saveableBackupEncryptionKey
+        });
     }
 
     return (
@@ -54,6 +72,7 @@ export default function() {
                     value={backupEncryptionKey}
                     onChangeText={setBackupEncryptionKey}
                     containerStyles={styles.inputContainer}
+                    hidden={true}
                 />
             </View>
         </SafeAreaView>
