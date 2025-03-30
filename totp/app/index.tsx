@@ -37,6 +37,8 @@ export default function HomeScreen() {
         title="TOTP"
         icon="plus"
         iconLink="/new"
+        iconLeft="cog"
+        iconLeftLink="/settings"
       />
       <FlatList
         data={Object.values(config.totps)}
