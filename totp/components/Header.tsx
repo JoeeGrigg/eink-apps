@@ -60,15 +60,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 700,
-    marginTop: 20,
-    marginBottom: 20
+    marginTop: 15,
+    marginBottom: 15
   },
   icon: {
     marginLeft: 'auto',
-    padding: 20
+    padding: 15
   },
   iconLeft: {
     marginRight: 'auto',
-    padding: 20
+    padding: 15
   }
 });
