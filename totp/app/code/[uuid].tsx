@@ -68,7 +68,6 @@ export default function Route() {
             title={item?.name}
             icon="trash"
             iconOnPress={deleteItem}
-            iconColor="red"
             iconLeft="chevron-left"
             iconLeftLink="/"
         />
